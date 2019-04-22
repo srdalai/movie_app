@@ -8,13 +8,13 @@ class MyHomePage extends StatelessWidget {
         title: Text("The Movie Database"),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8.0),
         color: Colors.grey,
         child: Column(
           children: <Widget>[
-            SizedBox(
-              height: 300.0,
-              width: MediaQuery.of(context).size.width,
+            Container(
+              height: 250,
+              padding: EdgeInsets.all(8),
+              child: new TopWidget(),
             ),
             SizedBox(
               height: 210,
@@ -30,6 +30,64 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class TopWidget extends StatelessWidget {
+  const TopWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double iconSizeBig = 15;
+    return ClipRRect(
+        borderRadius: BorderRadius.circular(4.0),
+        child: Stack(
+          children: <Widget>[
+            Image.asset("assets/images/main.jpg", fit: BoxFit.cover),
+            Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.center,
+                      end: Alignment.bottomCenter,
+                      colors: <Color>[Colors.transparent, Colors.black87])),
+              width: double.infinity,
+              padding: EdgeInsets.all(12),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    "Guardian of the Galaxy Vol. 2",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 5,
+                        itemBuilder: (context, item) {
+                          return Icon(
+                        Icons.star,
+                        color: Colors.yellow,
+                        size: iconSizeBig);
+                        },
+                      ),
+                      Text(
+                        "1,785 Ratings",
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ));
   }
 }
 
@@ -52,7 +110,7 @@ class PosterCard extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        end: Alignment.bottomCenter,
+                          end: Alignment.bottomCenter,
                           colors: <Color>[Colors.transparent, Colors.black87])),
                   width: double.infinity,
                   padding: EdgeInsets.all(12),
